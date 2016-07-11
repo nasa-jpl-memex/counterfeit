@@ -1132,60 +1132,6 @@
             ],
             "query": "q=*%3A*&fq=indexedAt:[NOW/DAY-30DAY%20TO%20NOW/DAY%2B1DAY]&wt=json&rows=0\n",
             "basic_query": "",
-            "custom": "&fq=ner_counterfeit_name_ts_md:*"
-          },
-          "style": {
-            "font-size": "10pt"
-          },
-          "arrangement": "horizontal",
-          "chart": "total",
-          "counter_pos": "above",
-          "donut": false,
-          "tilt": false,
-          "labels": true,
-          "spyable": true,
-          "show_queries": true,
-          "title": "ner_counterfeit_name_ts_md"
-        },
-        {
-          "span": 2,
-          "editable": true,
-          "type": "hits",
-          "loadingEditor": false,
-          "queries": {
-            "mode": "all",
-            "ids": [
-              0
-            ],
-            "query": "q=*%3A*&fq=indexedAt:[NOW/DAY-30DAY%20TO%20NOW/DAY%2B1DAY]&wt=json&rows=0\n",
-            "basic_query": "",
-            "custom": "&fq= ner_counterfeit_type_ts_md:*"
-          },
-          "style": {
-            "font-size": "10pt"
-          },
-          "arrangement": "horizontal",
-          "chart": "total",
-          "counter_pos": "above",
-          "donut": false,
-          "tilt": false,
-          "labels": true,
-          "spyable": true,
-          "show_queries": true,
-          "title": "ner_counterfeit_type_ts_md"
-        },
-        {
-          "span": 2,
-          "editable": true,
-          "type": "hits",
-          "loadingEditor": false,
-          "queries": {
-            "mode": "all",
-            "ids": [
-              0
-            ],
-            "query": "q=*%3A*&fq=indexedAt:[NOW/DAY-30DAY%20TO%20NOW/DAY%2B1DAY]&wt=json&rows=0\n",
-            "basic_query": "",
             "custom": "&fq= ner_money_ts_md:*"
           },
           "style": {
