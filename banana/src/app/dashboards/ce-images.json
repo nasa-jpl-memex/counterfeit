@@ -1,5 +1,5 @@
 {
-  "title": "Weapons Images Dashboard",
+  "title": "Counterfeit Electronics Images Dashboard",
   "services": {
     "query": {
       "idQueue": [
@@ -63,7 +63,7 @@
           "loadingEditor": false,
           "status": "Stable",
           "mode": "markdown",
-          "content": "Below is a dashboard intended to visualize the composition of the extracted weapons dataset.  The dashboard is organized first by rows, and then by panels.  In the second row you will find the _TIME WINDOW_ and _SEARCH_ panels, both of which apply global filters to the entire dashboard.  Currently the _TIME WINDOW_ panel is set to filter on the 'indexedAt' field, as all records have a value for that field.  The _GLOBAL FILTERS_ panel on the third row explicitly lists all global filters currently applied to the dashboard.  The _HITS_ type panels generally show the number of records that have a value for a particular field.",
+          "content": "Below is a dashboard intended to visualize the composition of the extracted counterfeit images dataset.  The dashboard is organized first by rows, and then by panels.  In the second row you will find the _TIME WINDOW_ and _SEARCH_ panels, both of which apply global filters to the entire dashboard.  Currently the _TIME WINDOW_ panel is set to filter on the 'indexedAt' field, as all records have a value for that field.  The _GLOBAL FILTERS_ panel on the third row explicitly lists all global filters currently applied to the dashboard.  The _HITS_ type panels generally show the number of records that have a value for a particular field.",
           "style": {},
           "title": "OVERVIEW"
         }
@@ -2196,7 +2196,7 @@
   },
   "solr": {
     "server": "/solr/",
-    "core_name": "imagecatdev",
+    "core_name": "counterfeitdev",
     "core_list": [
       "572studentsmerged",
       "dhsimagecatdev",
