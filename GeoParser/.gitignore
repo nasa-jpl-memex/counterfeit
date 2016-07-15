@@ -1,0 +1,9 @@
+
+*.pyc
+
+*.log
+
+*.pid
+
+*.csv
+solrToJson.py

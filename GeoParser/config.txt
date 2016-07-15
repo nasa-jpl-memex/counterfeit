@@ -1,0 +1,9 @@
+[general]
+APP_NAME = geoparser_app
+UPLOADED_FILES_PATH = static/uploaded_files
+STATIC = static
+SUBDOMAIN = geoparser
+TIKA_SERVER = http://localhost:8001
+SOLR_URL = http://localhost:6001/solr/
+SOLR_PORT = 6001
+UPLOADED_FILES_COLLECTION_NAME = uploaded_files
