@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>CE FacetView: Ads view</title>
+
+  <script type="text/javascript" src="vendor/jquery/1.7.1/jquery-1.7.1.min.js"></script>
+
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+  <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>  
+
+  <script type="text/javascript" src="vendor/linkify/1.11/linkify-1.11-min.js"></script>  
+  
+  <link rel="stylesheet" href="vendor/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.css">
+  <script type="text/javascript" src="vendor/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.min.js"></script>
+
+  <script type="text/javascript" src="vendor/highlight.js"></script>
+  <script type="text/javascript" src="jquery.facetview.js"></script>
+
+  <link rel="stylesheet" href="css/facetview.css">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Load c3.css -->
+  <link href="vendor/c3-0.4.10/c3.css" rel="stylesheet" type="text/css">
+
+  <!-- Load d3.js and c3.js -->
+  <script src="vendor/d3-3.5.6/d3.min.js" charset="utf-8"></script>
+  <script src="vendor/c3-0.4.10/c3.min.js"></script>
+
+  <script type="text/javascript">
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(decodeURIComponent(location.search));
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+function drawPage(nav_page) {
+  nav_page = typeof nav_page !== 'undefined' ?  nav_page : false;
+  document.cookie="query="+getParameterByName('query');
+
+  var query = getParameterByName('query');
+  var paging = getParameterByName('paging')
+  paging = $.parseJSON(paging);
+  if (!paging)
+  {
+      paging = {"from": 0, "size": 10};
+  };
+  if (!paging.from) {
+      paging['from'] = 0;
+  }
+  if (!paging.size) {
+      paging['size'] = 10;
+  }
+
+  var facets = getParameterByName('facets')
+  facets = $.parseJSON(facets);
+
+  // Initial default set of facets.  URL parameters can redefine/refine this.
+  if (!facets) {
+    facets = [
+          {"field":"persons", "display":"Persons"},
+          // {"field":"phonenumbers", "display":"Phone Number"},
+          // {"field":"weaponnames", "display":"Weapon Names"},
+          // {"field":"weapontypes", "display":"Weapon Types"},/
+          {"field":"ner_money_ts_md", "display":"Cost"},
+          {"field":"host", "display":"Host"},
+          {"field":"locations", "display":"Locations"},
+          {"field":"countries", "display":"Countries"},
+          {"field":"organizations", "display":"Organizations"},
+          {"field":"dates_aggr", "display":"Ad Dates (Aggregated by month)"}
+        ]
+  }
+  var active_facets = getParameterByName('active_facets')
+  active_facets = $.parseJSON(active_facets);
+
+  if (!active_facets) active_facets = {};
+
+  $('.facet-view-simple').empty();
+  $('.facet-view-simple').facetview({
+    "search_url": "http://imagecat.dyndns.org/solr/counterfeitdev/select?",
+    "search_index": 'solr',
+    // "datatype": 'jsonp',
+    "facets": [],
+    paging: {
+        from: 0,
+        size: 10
+    },
+    "linechart_field"  : "dates_aggr",
+    // "dendrogram_field" : "authors", 
+    "display_images" : true,
+    "text_limit": 400,
+    "object_limit": 10,
+    "paging": paging,
+    "q" : query,
+    "nav_page": nav_page,
+    "facets": facets,
+    "active_facets": active_facets,
+    "fields": ["persons", "ner_money_ts_md", "locations", "countries", "organizations"],
+    "result_display" : [ 
+        [
+          {
+            "pre" : '<b style="display:inline-block; width: 150px; float:left;">URL: </b><span style="display:inline-block; width: 700px; float: left;">',
+            "field" : "url",
+            "post" : "</span>"
+          }
+        ],
+        [
+          {
+            "pre" : '<b style="display:inline-block; width: 150px; float:left;">Dates: </b><span style="display:inline-block; width: 700px; float: left;">',
+            "field" : "dates",
+            "post" : "</span>"
+          }
+        ],
+        [
+          {
+            "pre" : '<b style="display:inline-block; width: 150px; float:left;">Locations: </b><span style="display:inline-block; width: 700px; float: left;">',
+            "field" : "locations",
+            "post" : "</span>"
+          }
+        ],
+        [
+          {
+            // "pre" : '<b style="display:inline-block; width: 150px; float:left;">Persons: </b><span style="display:inline-block; width: 700px; float: left;">',
+            "field" : "persons",
+            "post" : "</span>"
+          }
+        ],
+        [
+          {
+            "pre" : '<b style="display:inline-block; width: 150px; float:left;">Weapon Names: </b><span style="display:inline-block; width: 700px; float: left;">',
+            "field" : "ner_weapon_name_ts_md",
+            "post" : "</span>"
+          }
+        ],
+        [
+          {
+            "pre" : '<b style="display:inline-block; width: 150px; float:left;">Weapon Types: </b><span style="display:inline-block; width: 700px; float: left;">',
+            "field" : "ner_weapon_type_ts_md",
+            "post" : "</span>"
+          }
+        ],
+        [
+          {
+            "pre" : '<b style="display:inline-block; width: 150px; float:left;">Costs: </b><span style="display:inline-block; width: 700px; float: left;">',
+            "field" : "ner_money_ts_md",
+            "post" : "</span>"
+          }
+        ],
+        [
+          {
+            "pre" : '<b style="display:inline-block; width: 150px; float:left;">Organizations: </b><span style="display:inline-block; width: 700px; float: left;">',
+            "field" : "organizations",
+            "post" : "</span>"
+          }
+        ], 
+        [
+          {
+            "pre" : '<br><b style="display:inline-block; width: 150px; float:left;">Content: </b><span style="display:inline-block; width: 700px; float: left;">',
+            "field" : "content",
+            "post" : "</span><br>"
+          }
+        ]
+    ],
+    "linkify" : true
+    }
+  );
+$('.facetview_filtershow' ).trigger( "click" );
+};
+
+jQuery(document).ready(function($) {
+   drawPage();
+});
+
+window.onpopstate = function(state, title, url) {
+    drawPage(true);
+};
+  </script>
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">FacetView</a>
+      <ul class="nav">
+        <li><a href="http://github.com/darth-pr/facetview">Github</a></li>
+        <li><a href="http://github.com/darth-pr/facetview/issues">Issues</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container"> 
+  <div class="content">
+    <div class="page-header">
+      <h1>
+      Counterfeit Electronics Ads
+      </h1>
+    </div>
+
+    <div class="facet-view-simple"></div>
+
+  </div>
+
+</div>
+</body>
+</html>
